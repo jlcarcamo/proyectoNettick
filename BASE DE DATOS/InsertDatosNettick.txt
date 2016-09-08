@@ -1,0 +1,84 @@
+INSERT INTO `rubro` (`idRubro`, `nombre_rubro`) VALUES
+(1, 'CANALIZACION'),
+(2, 'ELECTRICIDAD'),
+(3, 'TELECOMUNICACIONES');
+
+INSERT INTO `unidadm` (`idunidadM`, `nombre_unidad` ,`unidad_medida`) VALUES
+(1,'Metros','mts'),
+(2,'Unidad','u');
+
+INSERT INTO `marca` (`idMarca`, `nombre_marca`) VALUES
+(1, 'LEGRAND'),
+(2, 'TRIMERX'),
+(3, 'BTICINO'),
+(4, 'ZOLODA');
+
+INSERT INTO `actividad_categoria` (`idActividad_categoria`, `nombre_categoria`, `descripcion`, `Rubro_idRubro`) VALUES
+(1, 'BANDEJA', 'canalización tipo bandeja EJ: DLP LEGRAND', 1),
+(2, 'Toma de Red CAT 6', 'Punto de red categoría 6', 3),
+(5, 'PVC-CUNDUIT', 'Tuberías pvc/conduit', 1),
+(6, 'EMT', 'Tuberías EMT METAL', 1);
+
+INSERT INTO `actividad_plantilla` (`idActividad`, `nombre_act`, `valor`, `tiempo_ejecucion`, `idActividad_categoria`) VALUES
+(1, 'BANDEJA DLP 150 x 50 BLANCA (2 x 65)', NULL, NULL, 1);
+
+INSERT INTO `material` (`idMaterial`, `nombre_material`,`cod_fabricante`, `valor`, `unidadM_idunidadM`, `Marca_idMarca`) VALUES
+(2, 'Cuerpo DLP 150 x 50 BLANCA (2 x 65)', '010433', NULL, 1, 1),
+(3, 'Tapa flexible dentada 65mm','010521', NULL, 1, 1),
+(4, 'Tabique de fraccionamiento','010472', NULL, 1, 1),
+(5, 'Tabique de separacion','010582', NULL, 1, 1),
+(6, 'Junta de Cuerpo','010691', NULL, 2, 1),
+(7, 'Junta de Tapa 65 mm','10801', NULL, 2, 1),
+(8, 'Junta de Tapa 130 mm','010804', NULL, 2, 1),
+(9, 'Tapa flexible dentada 130 mm','010524', NULL, 1, 1),
+(10, 'Ángulo interior variable','010602', NULL, 2, 1),
+(11, 'Tabique para ángulo interior','010611', NULL, 2, 1),
+(12, 'Ángulo exterior variable','010622', NULL, 2, 1),
+(13, 'Tabique para ángulo exterior','010632', NULL, 2, 1),
+(14, 'Ángulo plano', '010789', NULL, 2, 1),
+(15, 'Tapa extremo', '010703', NULL, 2, 1);
+
+INSERT INTO `material_has_actividad` (`Material_idMaterial`,`Actividad_idActividad`,`cantMaterial`,`tipo`) VALUES
+(2,1,1,1),
+(3,1,2,1),
+(4,1,1,1),
+(5,1,1,1),
+(6,1,1,1),
+(7,1,1,1),
+(8,1,1,1),
+(9,1,1,1),
+(10,1,1,1),
+(11,1,1,1),
+(12,1,1,1),
+(13,1,1,1),
+(14,1,1,1),
+(15,1,1,1);
+
+INSERT INTO `estado` (`idEstado`, `nombre_estado`) VALUES (NULL, 'Pendiente');
+INSERT INTO `estado` (`idEstado`, `nombre_estado`) VALUES (NULL, 'Asignada');
+INSERT INTO `estado` (`idEstado`, `nombre_estado`) VALUES (NULL, 'Ejecucion');
+
+INSERT INTO `actividad_plantilla` (`idActividad`, `nombre_act`, `valor`, `tiempo_ejecucion`, `idActividad_categoria`) VALUES
+(2, 'BANDEJA DLP 105 x 50 BLANCA', NULL, NULL, 1),
+(3, 'BANDEJA DLP 80 x 50 BLANCA ', NULL, NULL, 1),
+(4, 'BANDEJA DLP 150 x 50 GRIS (2 x 65)', NULL, NULL, 1),
+(5, 'BANDEJA DLP 105 x 50 GRIS', NULL, NULL, 1);
+
+INSERT INTO `actividad_categoria` (`idActividad_categoria`, `nombre_categoria`, `descripcion`, `Rubro_idRubro`) VALUES
+(7, 'CIrcuito Electrico 10 a', 'circuito THHN 10 AMPERES', 2),
+(8, 'Camaras de Televigilancia', NULL, 3),
+(9, 'Enchufe de seguridad Linea MATIX', NULL, 2);
+
+INSERT INTO `cargo` (`idcargo`, `nombreCargo`, `departamento`) VALUES
+(1, 'Jefe Operaciones', 'Operaciones');
+INSERT INTO `cargo` (`idcargo`, `nombreCargo`, `departamento`) VALUES
+(2, 'Supervisor', 'Operaciones');
+INSERT INTO `cargo` (`idcargo`, `nombreCargo`, `departamento`) VALUES
+(3, 'Tecnico', 'Operaciones');
+
+INSERT INTO `trabajador` (`idTrabajador`, `nombre_trabajador`, `apellidoP`, `apellidoM`, `rut`, `observacion`, `cargo_idcargo`, `contraseña`) VALUES
+(1, 'Jose Luis', 'carcamo', 'correa', '171758637', 'buen trabajador', 1, '123456');
+
+INSERT INTO `solicitud` (`idsolicitud`, `fechaSolicitud`, `descripcion`, `hora_visita`, `nombre_contacto`, `apellido_contacto`, `cargo`, `telefono_contacto`, `correo`, `prioridad`, `Estado_idEstado`) VALUES (NULL, '2016-08-30', 'Instalación de puestos de trabajo', NULL, 'Jose Luis', 'Carcamo Correa', 'Desarrollador', '90017372', 'jlcarcamo.correa@gmail.com', '', '1');
+
+INSERT INTO `trabajador` (`idtrabajador`, `nombre_trabajador`, `apellidoP`, `apellidoM`, `rut`, `observacion`, `cargo_idcargo`, `contraseña`) VALUES (NULL, 'Alfonso', 'Villa', 'Asocar', '2-2', 'Mr musculo', '2', '123456'), (NULL, 'German', 'Martinez', 'Martinez', '2-3', 'mr GERMANY', '3', '123456');
