@@ -23,52 +23,42 @@ if (isset($_GET['idActividad'])){
 }
 
 
+
+$idMat =$_POST['idMat'];
+
+echo $idMat;
+
 if (isset($_POST['btnCrear'])) {
-    $resultado = $ctrActividad->agregarMaterialActividad($_SESSION['idAct'],$_GET['idMaterial'], $_POST['cantMaterial'], $_POST['tipo']);
+    $resultado = $ctrActividad->agregarMaterialActividad($_SESSION['idAct'], $idMat , $_POST['cantMaterial'], $_POST['tipo']);
     header('Location: actividades.php');
 }
-
-
 ?>
 <link href="../css/bootstrap.min.css" rel="stylesheet">
 <link href="../css/cssBase.css" rel="stylesheet">
 <script src= '../js/jquery.min.js' type="text/javascript"></script>
 <script src= '../js/jsbase.js' type="text/javascript"></script>
-
-
-<script>
-    
-        
-      
+<script>       
     $(function(){
 
-        $("#mostrar").click(function(){
-            $("#bgventana").show();
-        })
+        $(".mostrarModal").click(function(){
+
+            var idMat = $(this).attr("mat"); 
+
+
+            $.POST('actividades.php', {"idMat": idMat}, function(datos){
+            });
+
+            $("#bgventana").show(); 
+            console.log(idMat);
+            }
+        );
 
         $("#ocultar").click(function(){
             $("#bgventana").hide();
         })
-
     })
-
-
-        /*
-        option 2
-        $(function(){
-
-
-        $("#mostrar").click(function(){
-            $("#bgventana").css("display","block");
-        })
-
-        $("#ocultar").click(function(){
-            $("#bgventana").css("display","none");
-        })
-
-    })*/
-
 </script>
+
 
 <h1 class="col-md-offset-1">Actividad<br><small></small></h1>
 <br>
@@ -140,7 +130,7 @@ if (isset($_POST['btnCrear'])) {
                         <td><?php echo $row['nombre_marca']; ?></td>
 
                         <td>
-                            <a id="mostrar" href="?idMaterial=<?php echo $row['idMaterial']; ?>"><span  class="glyphicon glyphicon-plus-sign"></span>Agregar</a>
+                            <a  class="mostrarModal" href="javascript:void(0);"Mat="<?php echo $row['idMaterial']; ?>"><span  class="glyphicon glyphicon-plus-sign"></span>Agregar</a>
 
                         </td>
                     </tr>
