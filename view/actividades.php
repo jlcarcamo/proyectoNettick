@@ -10,8 +10,6 @@ $ctrActividad = new ctrActividad();
 $ctrMaterial= new ctrMaterial();
 $listarMaterial = $ctrMaterial->listarMaterial();
 
-
-
 if (isset($_GET['idActividad'])){
     $_SESSION['idAct'] = $_GET['idActividad'];
     $buscarActividad = $ctrActividad->buscarporID($_SESSION['idAct']);
@@ -23,13 +21,8 @@ if (isset($_GET['idActividad'])){
 }
 
 
-
-$idMat =$_POST['idMat'];
-
-echo $idMat;
-
 if (isset($_POST['btnCrear'])) {
-    $resultado = $ctrActividad->agregarMaterialActividad($_SESSION['idAct'], $idMat , $_POST['cantMaterial'], $_POST['tipo']);
+    $resultado = $ctrActividad->agregarMaterialActividad($_SESSION['idAct'], $_POST['idMat'], $_POST['cantMaterial'], $_POST['tipo']);
     header('Location: actividades.php');
 }
 ?>
@@ -42,14 +35,10 @@ if (isset($_POST['btnCrear'])) {
 
         $(".mostrarModal").click(function(){
 
-            var idMat = $(this).attr("mat"); 
-
-
-            $.POST('actividades.php', {"idMat": idMat}, function(datos){
-            });
-
+            var idMat = $(this).attr("Mat"); 
             $("#bgventana").show(); 
             console.log(idMat);
+            $("#idMat").val(idMat);
             }
         );
 
@@ -143,6 +132,7 @@ if (isset($_POST['btnCrear'])) {
     </div>
     <div>
         <form method="POST">
+        <input type='hidden' id='idMat' name='idMat' value=''/>
             <div id="bgventana">
                 <div id="ventana">
                     <div class="">
@@ -192,6 +182,3 @@ if (isset($_POST['btnCrear'])) {
 }
 require_once('master.php');
 ?>
-
-
-

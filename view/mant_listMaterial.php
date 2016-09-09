@@ -10,8 +10,11 @@ $listarMaterial = $ctrMaterial->listarMaterial();
 ?>
 <link href="../css/bootstrap.min.css" rel="stylesheet">
 <h1 class="col-md-offset-1">Mantenedor de materiales <br><small>Listado</small></h1>
-<div onload="buscarMaterial('')">
-    <div>
+<div>
+    <div id="cue">
+        <script type="text/javascript">
+            buscarMaterial('cue');
+        </script>
         <label for="buscar" class="control-label">Buscar:</label>
     </div>
     <div>

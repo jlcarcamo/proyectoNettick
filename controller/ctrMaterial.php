@@ -12,9 +12,30 @@ if ($btn==='buscar')
 
 	$res = $inst->buscarMaterial($valor);
 
-		//print_r($res);
+		//print_r($res);enco
 	echo json_encode($res);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
