@@ -1,65 +1,52 @@
 <?php 
 session_start();
-
 function contenido()
 {
 include_once('../controller/ctrMaterial.php');
 
 $ctrMaterial= new ctrMaterial();
 $listarMaterial = $ctrMaterial->listarMaterial();
+/*
+if (isset($_POST['boton'])) {
+    if ($_POST['boton']==='buscar') 
+    {
+        $ctrMaterial->buscarMaterial($_POST['valor']); 
+    }
+}*/
 ?>
 <link href="../css/bootstrap.min.css" rel="stylesheet">
+<script src= '../js/jquery.min.js' type="text/javascript"></script>
+<script src="../js/jsbase.js" type="text/javascript"></script>
+
+
+
 <h1 class="col-md-offset-1">Mantenedor de materiales <br><small>Listado</small></h1>
-<div>
-    <div id="cue">
-        <script type="text/javascript">
-            buscarMaterial('cue');
-        </script>
-        <label for="buscar" class="control-label">Buscar:</label>
+<br>
+
+<div class="col-sm-10 col-md-offset-1">
+    
+    <script type="text/javascript">
+        buscarMaterial('');
+    </script>
+    
+
+
+
+    <div class="col-sm-5">
+        <input class="form-control" type="text" name="buscar" placeholder="Buscar" onkeyup="buscarMaterial(this.value);"></input>
     </div>
+
     <div>
-        <input type="text" name="buscar" id="buscar"></input>
+        <a href="mant_insertMaterial.php"><span class="glyphicon glyphicon-plus"></span>AGREGAR MATERIAL</a>
     </div>
 </div>
-<div class="col-md-offset-1">
-    <a href="mant_insertMaterial.php"><span class="glyphicon glyphicon-plus"></span> AGREGAR</a>
+
+
+<div class="col-sm-10 col-md-offset-1" id="lista">
+    
 </div>
-<br>
-<br>
-    <div  class="col-sm-9">  
-        <table class="table table-hover col-md-offset-1" >
-            <thead>
-               
-                <th>Nombre</th>
-                <th>Codigo Fabricante</th>
-                <th>Unidad</th>
-                <th>Marca</th>
-                <th colspan="2">OPCIONES</th>
-            </thead>
-            <tbody>
-                <?php while ($row = mysql_fetch_array($listarMaterial))
-                {
-                ?>
-                <tr>
-                    <td><?php echo $row['nombre_material']; ?></td>
-                    <td><?php echo $row['cod_fabricante']; ?></td>
-                    <td><?php echo $row['nombre_unidad']; ?></td>
-                    <td><?php echo $row['nombre_marca']; ?></td>
-                    <td>
-                        <a href="mant_EditMaterial.php?idMaterial=<?php echo $row['idMaterial']; ?>"> <span class="glyphicon glyphicon-edit"></span>editar</a>
-                    </td>
-                    <td>
-                        <a onclick="ConfirmarEliminar();" href="mant_deleteMaterial.php?idMaterial=<?php echo $row['idMaterial']; ?>"><span  class="glyphicon glyphicon-trash"></span>eliminar</a>
-                    </td>
-                </tr>
-                <?php
-                    }
-                ?>
-            </tbody>    
-        </table>
-    </div>  
-    <script src="../js/jquery.min.js"></script>
-    <script src="../js/jsbase.js"></script>
+
+
 
 <?php       
 }

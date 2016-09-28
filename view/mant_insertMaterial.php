@@ -29,6 +29,7 @@ if (isset($_POST['btnCrearMaterial']))
 	<div class="form-group">
 			<label class="col-sm-2 control-label">Nombre Material</label>
 		<div class="col-sm-6">
+			
 			<input class="form-control" type="text" name="nombre_material" value="" required/>
 		</div>
 	</div>

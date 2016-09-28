@@ -72,7 +72,6 @@ class actividad
 	public function insertarActividad()
 	{
 		$sql = "INSERT INTO actividad_plantilla(nombre_act, idActividad_categoria, descripcion) VALUES ('{$this->nombre_act}','{$this->idCategoria}', '{$this->descripcion}')";
-
 		$resultado = $this->conexion->Consulta($sql);
 		$this->conexion->Cerrarconex();
 	}
@@ -80,8 +79,7 @@ class actividad
 	//metodo buscarActividad por ID
 	public function buscarPorId()
 	{
-		$sql = "SELECT act.nombre_act, act.descripcion
-				FROM actividad_plantilla act WHERE act.idActividad = '{$this->idActividad}' LIMIT 1";
+		$sql = "SELECT act.idActividad, act.nombre_act, act.descripcion, ac.nombre_categoria, r.nombre_rubro FROM actividad_categoria ac INNER JOIN actividad_plantilla act ON ac.idActividad_categoria = act.idActividad_categoria INNER JOIN rubro r ON ac.Rubro_idRubro = r.idRubro  WHERE act.idActividad = '{$this->idActividad}'  LIMIT 1";
 
 		$resultado = $this->conexion->ConsultaResult($sql);
 
@@ -93,6 +91,33 @@ class actividad
 	}
 
 
+
+	public function editarActividad()
+	{
+		$sql = "UPDATE actividad_plantilla
+				SET nombre_act = '{$this->nombre_act}', idActividad_categoria = '{$this->idCategoria}', descripcion = '{$this->descripcion}' 
+				WHERE idActividad = '{$this->idActividad}'";
+
+		$resultado = $this->conexion->ConsultaResult($sql);
+		return $resultado;
+		$this->conexion->Cerrarconex();
+	}
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	//CON ESTE METODO RELACIONAMOS LOS MATERIALES CON UNA ACTIVIDAD EN ESPECIFICO PARA REALIZAR LAS PLANTILLAS DE ACTIVIDADES
 	public function agregarMaterialActividad()
 	{
 		$sql = "INSERT INTO material_has_actividad(Actividad_idActividad, Material_idMaterial, cantMaterial, tipo) VALUES ('{$this->idActividad}', '{$this->idMaterial}', '{$this->cantMaterial}', '{$this->tipo}')";
@@ -101,7 +126,7 @@ class actividad
 		$this->conexion->Cerrarconex();
 	} 
 
-
+	//busca los materiales seleccionados de la actividad_plantilla para ser agregados a la actividadCubicacion.
 	public function buscarNubMatAct(){
 
 	$sql = "SELECT mha.Actividad_idActividad, mha.Material_idMaterial, mha.cantMaterial , mha.tipo FROM material_has_actividad mha WHERE mha.Material_idMaterial = '{$this->idMaterial}' AND mha.Actividad_idActividad = '{$this->idActividad}'";
@@ -113,6 +138,19 @@ class actividad
 	return $row;
 	$this->conexion->Liberar($resultado);
 	$this->conexion->Cerrarconex();
+	}
+
+
+	//ELIMINA LA RELACION QUE TIENE UN MATERIAL CON UNA ACTIVIDAD_PLANTILLA
+	public function eliminarMaterialActividad()
+	{
+		$sql = "DELETE FROM material_has_actividad WHERE(Material_idMaterial = '{$this->idMaterial}' AND Actividad_idActividad = '{$this->idActividad}')";
+
+		$resultado = $this->conexion->Consulta($sql);
+
+		//$this->conexion->Liberar($resultado);
+				
+		$this->conexion->Cerrarconex();
 	}
 
 

@@ -26,7 +26,7 @@ class ctrActividad
 
 	public function insertarActividad($nombre_actividad, $idCategoria, $descripcion)
 	{
-		$this->actividad->set("nombre_actividad", $nombre_actividad);
+		$this->actividad->set("nombre_act", $nombre_actividad);
 		$this->actividad->set("idCategoria", $idCategoria);
 		$this->actividad->set("descripcion", $descripcion);
 	
@@ -41,6 +41,18 @@ class ctrActividad
 		return $dato;
 	}
 
+	public function editarActividad($idActividad, $nombre_actividad, $idCategoria, $descripcion)
+	{
+		$this->actividad->set("idActividad", $idActividad);
+		$this->actividad->set("nombre_act", $nombre_actividad);
+		$this->actividad->set("idCategoria", $idCategoria);
+		$this->actividad->set("descripcion", $descripcion);
+		
+		$resultado = $this->actividad->editarActividad();
+
+		return $resultado;
+	}
+
 	public function agregarMaterialActividad($idActividad, $idMaterial, $cantMaterial, $tipo)
 	{
 		$this->actividad->set("idActividad", $idActividad);
@@ -52,13 +64,21 @@ class ctrActividad
 		$this->actividad->agregarMaterialActividad();
 	}	
 
-		public function buscarNubMatAct($idMaterial, $idActividad)
+	public function buscarNubMatAct($idMaterial, $idActividad)
 	{
 		$this->actividad->set("idMaterial", $idMaterial);
 		$this->actividad->set("idActividad", $idActividad);
 
 		$dato = $this->actividad->buscarNubMatAct();
 		return $dato;
+	}
+
+	public function eliminarMaterialActividad($idMaterial, $idActividad){
+
+		$this->actividad->set("idMaterial", $idMaterial);
+		$this->actividad->set("idActividad", $idActividad);
+
+		$this->actividad->eliminarMaterialActividad();
 	}
 }
  ?>

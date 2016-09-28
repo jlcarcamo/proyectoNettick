@@ -55,23 +55,15 @@ class actividadCub
 		$idMat = $this->idMaterial;
 		$cantM = $this->cantMaterial;
 		$tipo = $this->tipo;
-
-
-		echo var_dump($idMat);
-
 		//recorro los valores del array, de primero a último
 		for($i = 0; $i < count($idMat); $i++)
 		{
-    	
     	$sql .= sprintf("('%s', '%s', '%s', '%s'),", $idCub, $idMat[$i], $cantM[$i], $this->tipo[$i]);
 		}
 
  		//a cada paso añado a la consulta de inserción cada uno de los valores entrecomillado y entre paréntesis, seguido por una coma
     	$sql=rtrim($sql,',');//elimino la última coma sobrante
 		
-
-		echo $sql;
-
 		$this->conexion->Consulta($sql);
 		$this->conexion->Cerrarconex();
 	}

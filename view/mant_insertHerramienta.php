@@ -19,9 +19,9 @@ if (isset($_POST['btnCrearHerramienta']))
 
 }
 if ($resultado_id == 1) {
-	echo "esta wea contiene algo";
+	echo "contiene algo";
 	
-}else echo "esta wea no conetiene nada";
+}else echo " conetiene nada";
 
 
 ?>

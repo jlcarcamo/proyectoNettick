@@ -13,69 +13,48 @@ $ctrActividadCub = new ctrActividadCub();
 $ctrMaterial = new ctrMaterial();
 $trabajador->Tiempo();
 
-
 if (isset($_GET['idCategoria'])) {
 	$_SESSION['idCategoria'] = $_GET['idCategoria'];
 }
+
 if (isset($_GET['idActividad'])) {
 	$_SESSION['idActividad'] = $_GET['idActividad'];
 	$listarMaterial = $ctrMaterial->buscarPorActividad($_GET['idActividad']);
 }	
 
-
-
 $listarActividad = $ctrActividad->Buscar($_SESSION['idCategoria']);
-
-//echo $_SESSION['idActividad'];
-//echo $_SESSION['idCubicacion'];
-
 
 if (isset($_POST['btnAgregarActividad']))
 {
 //aqui agrego una actividad y me retorna el id de la actividad agregada
 $id_res = $ctrActividadCub->insertarActividadCub($_SESSION['idActividad'],$_SESSION['idCubicacion']);
-	
+$_SESSION['idActCub']= $id_res;
 	
 	//aqui recorro el array materialId para buscar la cantidad de material y el tipo de material, luego los guardo en arreglos
 	foreach ($_POST['materialId'] as $materialId) 
 	{		
 		$resultado = $ctrActividad->buscarNubMatAct($materialId, $_SESSION['idActividad']);
-
-		//$idMaterial1 = $resultado['Material_idMaterial'];
-		
 		$idMat[] = $resultado['Material_idMaterial'];
 		$cantM[] = $resultado['cantMaterial'];		
 		$tipo[]  = $resultado['tipo'];
 	}
-
 	//aqui ejecuto la funcion que recibe los array para realizar un insert
 	$ctrActividadCub->agregarMaterialActividadCub($id_res, $idMat, $cantM, $tipo);
-
-	//var_dump($idMat);
-
-
-
-
-	
-
-	
+	//echo $id_res;
 }
+echo $_SESSION['idActCub'];
  ?>
 <link href="../css/bootstrap.min.css" rel="stylesheet">
 
  <div class="col-md-offset-1">
  	<h1>Cubicación <br><small>Listado de actividades</small></h1>
  </div>
-
  <br>
  <div>
 	<h3 class="col-md-offset-1">Paso 3<small> Seleccione la actividad a agregar</small></h3>
  </div>
  <br>
  <br>
-
-
-
 	<div class="col-sm-9 col-md-offset-1">
 			<table class="table table-hover ">
 					<thead>
@@ -107,13 +86,6 @@ $id_res = $ctrActividadCub->insertarActividadCub($_SESSION['idActividad'],$_SESS
 					
 				</table>
 	</div>
-
-
-
-
-
-		
-			
 
 <?php 		
 if (isset($_GET['idActividad'])) {
@@ -148,11 +120,6 @@ if (isset($_GET['idActividad'])) {
 
 									<?php 
 									 ?>
-									
-
-
-
-
 									<td><?php echo $row['nombre_material']; ?></td>
 									<td><?php echo $row['cod_fabricante']; ?></td>
 									<td><?php echo $row['unidad_medida']; ?></td>
@@ -163,7 +130,6 @@ if (isset($_GET['idActividad'])) {
 							}
 						}	
 				?>
-					
 	      	</tbody>
 	      	<div class="col-sm-3 col-md-offset-5">
 	      					<button name="btnAgregarActividad" type="submit">Agregar Actividad</button>
@@ -171,9 +137,6 @@ if (isset($_GET['idActividad'])) {
 	      </table>
 			    
 	  </div>
-		  
-
-
 <?php 
 	}
 }

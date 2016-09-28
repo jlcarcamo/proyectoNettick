@@ -14,49 +14,51 @@ if (isset($_GET['idActividad'])){
     $_SESSION['idAct'] = $_GET['idActividad'];
     $buscarActividad = $ctrActividad->buscarporID($_SESSION['idAct']);
     $buscarMaterial = $ctrMaterial->buscarPorActividad($_SESSION['idAct']);
-   
 }elseif(isset($_SESSION['idAct'])){
     $buscarActividad = $ctrActividad->buscarporID($_SESSION['idAct']);
     $buscarMaterial = $ctrMaterial->buscarPorActividad($_SESSION['idAct']);
 }
 
+if (isset($_GET['idMateria'])){
+    $ctrActividad->eliminarMaterialActividad($_GET['idMateria'],$_SESSION['idAct']);
+    header('Location: actividades.php');
+}
 
 if (isset($_POST['btnCrear'])) {
     $resultado = $ctrActividad->agregarMaterialActividad($_SESSION['idAct'], $_POST['idMat'], $_POST['cantMaterial'], $_POST['tipo']);
     header('Location: actividades.php');
 }
 ?>
-<link href="../css/bootstrap.min.css" rel="stylesheet">
 <link href="../css/cssBase.css" rel="stylesheet">
 <script src= '../js/jquery.min.js' type="text/javascript"></script>
-<script src= '../js/jsbase.js' type="text/javascript"></script>
+<script src="../js/jsbase.js" type="text/javascript"></script>
 <script>       
     $(function(){
 
         $(".mostrarModal").click(function(){
-
             var idMat = $(this).attr("Mat"); 
             $("#bgventana").show(); 
             console.log(idMat);
             $("#idMat").val(idMat);
             }
         );
-
         $("#ocultar").click(function(){
             $("#bgventana").hide();
         })
     })
 </script>
-
-
-<h1 class="col-md-offset-1">Actividad<br><small></small></h1>
+<h1 class="col-md-offset-1">Actividad<br><small>Relacion de actividad y materiales</small></h1>
 <br>
-<br>
+   <script type="text/javascript">
+        buscarMat('');
+    </script>
 
-    <div class="col-sm-9"> 
+<br>
+    <div class="col-sm-9 col-md-offset-1"> 
+        <h4><strong>Actividad</strong></h4>
         <div>
-            <table class="table table-hover col-md-offset-1" >
-                <thead>               
+            <table class="table table-hover" >
+                <thead class="thead-inverse">               
                     <th class="col-sm-4">Nombre</th>
                     <th>Descripcion</th>
                 </thead>
@@ -67,9 +69,11 @@ if (isset($_POST['btnCrear'])) {
                     </tr>
                 </tbody>    
             </table>
-        </div> 
+        </div>
+        <br>
+        <h4><strong>Materiales que integran actividad</strong></h4>
         <div>
-            <table class="table table-hover col-md-offset-1" >
+            <table class="table table-hover" >
                 <thead>
                    
                     <th>Nombre</th>
@@ -97,39 +101,34 @@ if (isset($_POST['btnCrear'])) {
                 </tbody>    
             </table>
         </div>
-
-        <div>
-            <table class="table table-hover col-md-offset-1" >
-                <thead>
-                   
-                    <th>Nombre</th>
-                    <th class="col-sm-2">Cod. Fabricante</th>
-                    <th>Unidad</th>
-                    <th>Marca</th>
-                    <th colspan="2">OPCIONES</th>
-                </thead>
-                <tbody>
-                    <?php while ($row = mysql_fetch_array($listarMaterial))
-                    {
-                    ?>
-                    <tr>
-                        <td class="col-sm-6"><?php echo $row['nombre_material']; ?></td>
-                        <td><?php echo $row['cod_fabricante']; ?></td>
-                        <td><?php echo $row['nombre_unidad']; ?></td>
-                        <td><?php echo $row['nombre_marca']; ?></td>
-
-                        <td>
-                            <a  class="mostrarModal" href="javascript:void(0);"Mat="<?php echo $row['idMaterial']; ?>"><span  class="glyphicon glyphicon-plus-sign"></span>Agregar</a>
-
-                        </td>
-                    </tr>
-                    <?php
-                        }
-                    ?>
-                </tbody>    
-            </table>
-        </div>      
+        <br>
+        <h4><strong>Materiales</strong></h4>
+            
     </div>
+
+
+
+
+
+
+
+    <div class="col-sm-5 col-md-offset-1">
+        <input class="form-control" type="text" name="buscar" placeholder="Buscar" onkeyup="buscarMat(this.value);"></input>
+    </div>
+
+
+    <div class="col-sm-10 col-md-offset-1" id='lista'>  
+ 
+
+    </div>
+
+
+
+
+
+
+    
+
     <div>
         <form method="POST">
         <input type='hidden' id='idMat' name='idMat' value=''/>

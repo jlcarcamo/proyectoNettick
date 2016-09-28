@@ -33,7 +33,7 @@ $listarHerramienta = $ctrHerramienta->listarHerramienta();
                     <td><?php echo $row['nombre_categoria']; ?></td>
                     <td><?php echo $row['descripcion']; ?></td>
                     <td>
-                        <a href="mant_editHerramienta.php?idHerramienta=<?php echo $row['idHerramienta']; ?>"> <span class="glyphicon glyphicon-edit"></span></a>
+                        <a href="mant_EditHerramienta.php?idHerramienta=<?php echo $row['idHerramienta']; ?>"> <span class="glyphicon glyphicon-edit"></span></a>
                     </td>
                     <td>
                         <a onclick="ConfirmarEliminar();" href="mant_deleteHerramienta.php?idHerramienta=<?php echo $row['idHerramienta']; ?>"><span  class="glyphicon glyphicon-trash"></span></a>

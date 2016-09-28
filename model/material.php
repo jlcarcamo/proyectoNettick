@@ -103,7 +103,7 @@ class material
 
 		$resultado = $this->conexion->Consulta($sql);
 
-		//$this->conexion->Liberar($resultado);
+		
 				
 		$this->conexion->Cerrarconex();
 	}
@@ -112,7 +112,7 @@ class material
 	public function buscarMaterial($valor)
 	{
 
-		$sql= "SELECT m.idMaterial,  m.nombre_material, m.cod_fabricante, um.nombre_unidad, ma.nombre_marca FROM unidadm um INNER JOIN material m ON m.unidadM_idunidadM = um.idunidadM INNER JOIN marca ma ON ma.idMarca = m.Marca_idMarca WHERE m.nombre_material like '%".$valor."%' or ma.nombre_marca like '%".$valor."%'";
+		$sql= "SELECT m.idMaterial,  m.nombre_material, m.cod_fabricante, um.nombre_unidad, ma.nombre_marca FROM unidadm um INNER JOIN material m ON m.unidadM_idunidadM = um.idunidadM INNER JOIN marca ma ON ma.idMarca = m.Marca_idMarca WHERE m.nombre_material like '%".$valor."%' or ma.nombre_marca like '%".$valor."%' or m.cod_fabricante like '%".$valor."%'";
 
 		//$this->conexion->set_charset('utf8');
 

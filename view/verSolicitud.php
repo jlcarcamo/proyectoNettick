@@ -50,9 +50,11 @@ if ($totalFilas==0)
 <link href="../css/cssBase.css" rel="stylesheet">
 
 <script type="text/javascript"> 
+
 function desplegar(_valor){
-	document.getElementById("bgventana").style.visibility= _valor;
+	document.getElementById("bgventana1").style.visibility= _valor;
 }
+
 </script>
 
 
@@ -72,11 +74,9 @@ function desplegar(_valor){
 	?>
 				<label>-<?php echo $row['nombre_trabajador']; ?></label>
 				<label><?php echo $row['apellidoP']; ?></label>
-
 			<?php 
 			}
 		} 
-
 	}else
 	{ ?>
 		<div class="col-md-offset-1">
@@ -85,14 +85,8 @@ function desplegar(_valor){
 	<?php 
 	}
 	 ?>
-	
 
 </div>
-
-
-
-panel
-
 <br>
 
 <div class="form-horizontal col-sm-offset-2"> 	
@@ -163,8 +157,8 @@ panel
 <br>
 <br>
 	<form method="POST">
-		<div id="bgventana">
-			<div id="ventana">
+		<div id="bgventana1">
+			<div id="ventana1">
 				<div class="">
 					<div class="form-group">
 				    	<a class="col-sm-offset-10" href="javascript:desplegar('hidden');">Cerrar <span class="glyphicon glyphicon-remove"></span></a>

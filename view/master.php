@@ -17,7 +17,7 @@ $trabajador->Tiempo();
 <body>
 
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
-<body class="home">
+<body class="">
     <div class="container-fluid display-table">
 
         <div class="row display-table-row">
@@ -63,13 +63,13 @@ $trabajador->Tiempo();
                                     </div>
                                 </nav>
                                 <div class="search hidden-xs hidden-sm">
-                                    <input type="text" placeholder="Search" id="search">
+                                    <input type="text" placeholder="..." id="search">
                                 </div>
                             </div>
                             <div class="col-md-5">
                                 <div class="header-rightside"><a href="logout.php">Cerrar Sesión</a>
                                     <ul class="list-inline header-top pull-right">
-                                        <li class="hidden-xs"><a href="#" class="add-project" data-toggle="modal" data-target="#add_project">Add Project</a></li>
+                                        <li class="hidden-xs"><a href="#" class="add-project" data-toggle="modal" data-target="#add_project">NETLIFE</a></li>
                                         <li><a href="#"><i class="fa fa-envelope" aria-hidden="true"></i></a></li>
                                         <li>
                                             <a href="#" class="icon-info">

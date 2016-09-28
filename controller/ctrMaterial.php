@@ -1,45 +1,17 @@
 <?php 
 include_once("../model/material.php");
 
-
-$btn = $_POST['boton'];
-
-if ($btn==='buscar') 
+if (isset($_POST['boton'])) 
 {
-	$valor = $_POST['valor'];
-
+	if ($_POST['boton']==='buscar') 
+	{
 	$inst = new material();
-
-	$res = $inst->buscarMaterial($valor);
-
-		//print_r($res);enco
+	$res = $inst->buscarMaterial($_POST['valor']);
 	echo json_encode($res);
+	}
+
+	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 class ctrMaterial
 {
 	private $material;
@@ -49,14 +21,12 @@ class ctrMaterial
 		$this->material = new material();
 	}
 
-
 	public function buscarPorActividad($idActividad)
 	{
 		$this->material->set("idActividad", $idActividad);
 		$dato = $this->material->buscarPorActividad();
 		return $dato;
 	}
-
 
 	public function listarMaterial()
 	{
@@ -83,7 +53,7 @@ class ctrMaterial
 		return $dato;
 	}
 
-		public function eliminarMaterial($idMaterial)
+	public function eliminarMaterial($idMaterial)
 	{
 		$this->material->set("idMaterial", $idMaterial);
 
@@ -105,25 +75,13 @@ class ctrMaterial
 	}
 
 
-	public function buscarMaterial()
+	public function buscarMaterial($valor)
 	{
-		$btn = $_POST['boton'];
+		$resultado = $this->material->buscarMaterial($valor);
 
-		if ($btn==='buscar') 
-		{
-			$valor = $_POST['valor'];
+		echo json_encode($resultado);
 
-			$res = $material->buscarMaterial($valor);
-
-		//print_r($res);
-		echo json_encode($res);
-		}
+		
 	
-
-
 	}
-
-
-
 }
- ?>
